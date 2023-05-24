@@ -21080,7 +21080,7 @@ pre[class*=language-] > code {
   border-radius: 50%;
   transform: translate(-50%, -50%);
   background: currentColor;
-  margin-right: -10px;
+  margin-right: -15px;
 }
 .overview-product-legends p span {
   color: var(--bs-body-color);
