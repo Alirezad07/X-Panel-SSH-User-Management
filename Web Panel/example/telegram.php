@@ -30,7 +30,6 @@ if (strpos($chattext, "/start") !== false) {
 }
 else
 {
-    $chattext="ttest:1010";
     $explodetext=explode(':',$chattext);
     $username=$explodetext[0];
     $password=$explodetext[1];
