@@ -11,6 +11,12 @@ if [ "$EUID" -ne 0 ]
 then echo "Please run as root"
 exit
 fi
+
+#Disable "Daemons using outdated libraries" pop-up in ubuntu 22+
+sed -i 's/#\$nrconf{restart} = '\''i'\'';/$nrconf{restart} = '\''a'\'';/' /etc/needrestart/needrestart.conf
+#Disable "Pending kernel upgrade" pop-up in ubuntu 22+
+sed -i "s/#\$nrconf{kernelhints} = -1;/\$nrconf{kernelhints} = -1;/g" /etc/needrestart/needrestart.conf
+
 sed -i 's/#Port 22/Port 22/' /etc/ssh/sshd_config
 sed -i 's/#Banner none/Banner \/root\/banner.txt/g' /etc/ssh/sshd_config
 sed -i 's/AcceptEnv/#AcceptEnv/g' /etc/ssh/sshd_config
@@ -122,7 +128,7 @@ wait
 
 if command -v apt-get >/dev/null; then
 sudo NEETRESTART_MODE=a apt-get update --yes
-sudo apt-get -y install software-properties-common
+sudo DEBIAN_FRONTEND=noninteractive apt-get -y install software-properties-common
 apt-get install -y stunnel4 && apt-get install -y cmake && apt-get install -y screenfetch && apt-get install -y openssl
 sudo add-apt-repository ppa:ondrej/php -y
 #sudo DEBIAN_FRONTEND=noninteractive apt-get install postfix -y
