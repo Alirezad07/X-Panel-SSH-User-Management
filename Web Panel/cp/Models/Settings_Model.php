@@ -53,9 +53,10 @@ class Settings_Model extends Model
         //shell_exec("sudo sed -i \"s/".$data_sybmit['sshport_old']."/".$data_sybmit['sshport']."/g\" /var/www/html/cp/Config/database.php &");
         shell_exec("sudo sed -i 's/port = \"" . $data_sybmit['sshport_old'] . "\"/port = \"" . $data_sybmit['sshport'] . "\"/' /var/www/html/cp/Config/database.php");
         shell_exec("sudo sed -i 's/Port " . $data_sybmit['sshport_old'] . "/Port " . $data_sybmit['sshport'] . "/' /etc/ssh/sshd_config");
-       $com = $data_sybmit['sshtlsport'] . ' ' . $data_sybmit['sshport'];
+        $com = $data_sybmit['sshtlsport'] . ' ' . $data_sybmit['sshport'];
         shell_exec("bash Libs/sh/stunnel.sh $com");
         $sql = "UPDATE setting SET ssh_tls_port=? WHERE id=?";
+        $this->db->prepare($sql)->execute($data_sybmit['sshtlsport'], '1']);
         shell_exec("sudo systemctl enable stunnel4");
         shell_exec("sudo systemctl restart stunnel4");
         shell_exec("sudo reboot");
