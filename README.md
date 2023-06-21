@@ -69,6 +69,7 @@ Ubuntu 18+ (پیشنهادی :Ubuntu 20)<br>
 اگرنسخه فعلی XPanel  شما نسخه 2 به پائین است ابتدا با دستور زیر پنل را حذف کنید.
 ```
 rm -rf /var/www/html/
+mkdir /var/www/
 mkdir /var/www/html/
 chmod 777 /var/www/html/
 ```
