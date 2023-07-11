@@ -29,9 +29,11 @@ class Settings_Model extends Model
             }
             if ($queryCount == 0 && $queryCount_ress == 0) {
                 header("location: login");
+                exit;
             }
         } else {
             header("location: login");
+            exit;
         }
     }
 
